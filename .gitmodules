@@ -1,0 +1,12 @@
+[submodule "external/glfw"]
+	path = external/glfw
+	url = https://github.com/glfw/glfw
+	ignore = all
+[submodule "external/glad"]
+	path = external/glad
+	url = https://github.com/Dav1dde/glad
+	ignore = all
+[submodule "external/cimgui"]
+	path = external/cimgui
+	url = https://github.com/cimgui/cimgui
+	ignore = all
