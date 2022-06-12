@@ -79,6 +79,9 @@ int main(void)
     glfwPollEvents();
   }
 
+  glDeleteBuffers(1, &vertex_buffer);
+  glDeleteBuffers(1, &index_buffer);
+
   glDeleteProgram(shader);
   gui_terminate();
   glfwTerminate();
