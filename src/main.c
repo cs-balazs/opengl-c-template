@@ -6,6 +6,7 @@
 #include "shader.h"
 #include "window.h"
 #include "gui.h"
+#include "gfx.h"
 
 int main(void)
 {
@@ -34,20 +35,13 @@ int main(void)
   glGenVertexArrays(1, &vertex_array_object_id);
   glBindVertexArray(vertex_array_object_id);
 
-  uint32_t buffer;
-  glGenBuffers(1, &buffer);
-  glBindBuffer(GL_ARRAY_BUFFER, buffer);
-  glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions,
-               GL_STATIC_DRAW);
+  uint32_t vertex_buffer =
+    create_vertex_buffer(positions, 4 * 2 * sizeof(float));
 
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
 
-  uint32_t index_buffer_object;
-  glGenBuffers(1, &index_buffer_object);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer_object);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(uint32_t), indicies,
-               GL_STATIC_DRAW);
+  uint32_t index_buffer = create_index_buffer(indicies, 6);
 
   uint32_t shader = create_shader("basic");
   glUseProgram(shader);

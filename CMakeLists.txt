@@ -45,6 +45,9 @@ add_subdirectory(lib/window)
 # --- SHADER ---
 add_subdirectory(lib/shader)
 
+# --- GFX ---
+add_subdirectory(lib/gfx)
+
 
 ##################################
 #      LINKING ALL THE LIBS      #
@@ -60,4 +63,5 @@ target_link_libraries(${PROJECT_NAME}
   gui
   window
   shader
+  gfx
 )
