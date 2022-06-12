@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "shader.h"
 #include "window.h"
 #include "gui.h"
 #include "gfx.h"
