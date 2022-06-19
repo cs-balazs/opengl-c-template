@@ -35,8 +35,8 @@ void vertex_array_add_buffer(const uint32_t vertex_array,
                              const BufferLayout *layout);
 
 // Shaders
-int compile_shader(unsigned int type, const char *source);
+uint32_t compile_shader(uint32_t type, const char *source);
 char *read_shader(const char *type, const char *name);
-unsigned int create_shader(const char *name);
+uint32_t create_shader(const char *name);
 
 #endif

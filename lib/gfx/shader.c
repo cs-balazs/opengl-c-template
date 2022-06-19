@@ -5,16 +5,16 @@
 #include "gfx.h"
 #include "io.h"
 
-int compile_shader(unsigned int type, const char *source)
+uint32_t compile_shader(unsigned int type, const char *source)
 {
-  unsigned int id = glCreateShader(type);
+  uint32_t id = glCreateShader(type);
   glShaderSource(id, 1, &source, NULL);
   glCompileShader(id);
 
-  int result;
+  uint8_t result;
   glGetShaderiv(id, GL_COMPILE_STATUS, &result);
   if (result == GL_FALSE) {
-    int length;
+    uint32_t length;
     glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
     char message[length];
     glGetShaderInfoLog(id, length, &length, message);
@@ -30,15 +30,15 @@ int compile_shader(unsigned int type, const char *source)
   return id;
 };
 
-unsigned int create_shader(const char *name)
+uint32_t create_shader(const char *name)
 {
   char *vertex_shader = read_shader("vertex", name);
   char *fragment_shader = read_shader("fragment", name);
 
-  unsigned int program = glCreateProgram();
-  unsigned int compiled_vertex_shader =
+  uint32_t program = glCreateProgram();
+  uint32_t compiled_vertex_shader =
     compile_shader(GL_VERTEX_SHADER, vertex_shader);
-  unsigned int compiled_fragment_shader =
+  uint32_t compiled_fragment_shader =
     compile_shader(GL_FRAGMENT_SHADER, fragment_shader);
 
   glAttachShader(program, compiled_fragment_shader);
