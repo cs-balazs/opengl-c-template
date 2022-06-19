@@ -1,7 +1,6 @@
 #include "gfx.h"
 #include <glad/glad.h>
 #include <assert.h>
-#include <stdio.h>
 
 uint32_t opengl_type_size(const uint32_t type)
 {
@@ -14,9 +13,6 @@ uint32_t opengl_type_size(const uint32_t type)
     return 2;
   }
 
-  printf("type: %d\n", type);
-  printf("GL_FLOAT: %d\n", GL_FLOAT);
-
   assert(type == GL_FLOAT || type == GL_UNSIGNED_INT ||
          type == GL_UNSIGNED_BYTE);
 }
@@ -24,7 +20,6 @@ uint32_t opengl_type_size(const uint32_t type)
 void buffer_layout_add_element(BufferLayout *layout,
                                BufferLayoutElement *element)
 {
-  printf("element->type: %d\n", element->type);
   layout->elements[layout->length] = *element;
   layout->length++;
   layout->stride += element->count * opengl_type_size(element->type);
@@ -51,7 +46,6 @@ void vertex_array_add_buffer(const uint32_t vertex_array,
     glVertexAttribPointer(i, element.count, element.type, element.normalized,
                           layout->stride, (const void *)offset);
 
-    printf("element.type: %d\n", element.type);
     offset += element.count * opengl_type_size(element.type);
   }
 }
