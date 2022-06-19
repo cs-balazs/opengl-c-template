@@ -30,15 +30,18 @@ int main(void)
   };
   // clang-format on
 
-  uint32_t vertex_array_object_id;
-  glGenVertexArrays(1, &vertex_array_object_id);
-  glBindVertexArray(vertex_array_object_id);
-
+  uint32_t vertex_array = create_vertex_array();
   uint32_t vertex_buffer =
     create_vertex_buffer(positions, 4 * 2 * sizeof(float));
+  BufferLayout layout = { stride: 0, length: 0 };
+  BufferLayoutElement element = {
+    type: GL_FLOAT,
+    count: 2,
+    normalized: GL_FALSE
+  };
 
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+  buffer_layout_add_element(&layout, &element);
+  vertex_array_add_buffer(vertex_array, vertex_buffer, &layout);
 
   uint32_t index_buffer = create_index_buffer(indicies, 6);
 
@@ -68,7 +71,7 @@ int main(void)
     glUniform4f(location, (((float)R) / 255.0f), (((float)G) / 255.0f),
                 (((float)B) / 255.0f), 1.0f);
 
-    glBindVertexArray(vertex_array_object_id);
+    glBindVertexArray(vertex_array);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
 
