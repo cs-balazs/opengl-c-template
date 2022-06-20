@@ -38,5 +38,7 @@ void vertex_array_add_buffer(const uint32_t vertex_array,
 uint32_t compile_shader(uint32_t type, const char *source);
 char *read_shader(const char *type, const char *name);
 uint32_t create_shader(const char *name);
+void setUniform4f(uint32_t shader, const char *name, float v0, float v1,
+                  float v2, float v3);
 
 #endif

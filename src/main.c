@@ -52,10 +52,7 @@ int main(void)
   int G = 0;
   int B = 0;
 
-  int32_t location = glGetUniformLocation(shader, "u_Color");
-  assert(location != -1);
-  glUniform4f(location, (((float)R) / 255.0f), (((float)G) / 255.0f),
-              (((float)B) / 255.0f), 1.0f);
+  setUniform4f(shader, "u_Color", 0.0f, 0.0f, 0.0f, 1.0f);
 
   glBindVertexArray(0);
   glUseProgram(0);
@@ -68,8 +65,8 @@ int main(void)
     gui_update(&R, &G, &B);
 
     glUseProgram(shader);
-    glUniform4f(location, (((float)R) / 255.0f), (((float)G) / 255.0f),
-                (((float)B) / 255.0f), 1.0f);
+    setUniform4f(shader, "u_Color", (((float)R) / 255.0f),
+                 (((float)G) / 255.0f), (((float)B) / 255.0f), 1.0f);
 
     glBindVertexArray(vertex_array);
 
