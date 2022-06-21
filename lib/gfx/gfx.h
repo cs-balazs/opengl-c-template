@@ -40,5 +40,9 @@ char *read_shader(const char *type, const char *name);
 uint32_t create_shader(const char *name);
 void setUniform4f(uint32_t shader, const char *name, float v0, float v1,
                   float v2, float v3);
+void setUniform1i(uint32_t shader, const char *name, int32_t value);
+
+// Textures
+uint32_t create_texture(const char *name);
 
 #endif

@@ -10,3 +10,6 @@
 	path = external/cimgui
 	url = https://github.com/cimgui/cimgui
 	ignore = all
+[submodule "external/cglm"]
+	path = external/cglm
+	url = https://github.com/recp/cglm

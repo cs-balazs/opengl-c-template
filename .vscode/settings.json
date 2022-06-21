@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.env.development": "env",
+    "*.env.production": "env",
+    "*.env.local.production": "env",
+    "*.env.local.development": "env",
+    "*.env.local": "env",
+    "*.h": "c",
+    "glm.hpp": "c"
+  }
+}

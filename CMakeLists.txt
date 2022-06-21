@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(app VERSION 1.0)
 
-
-###########################
-#      EXTERNAL LIBS      #
-###########################
+# ##########################
+# EXTERNAL LIBS      #
+# ##########################
 
 # --- CIMGUI ---
 # Only linking imgui backends for opengl and glfw, extend the regex if additional ones are required
@@ -28,10 +27,12 @@ add_subdirectory(external/glfw)
 # --- GLAD ---
 add_subdirectory(external/glad)
 
+# --- CGLM ---
+add_subdirectory(external/cglm)
 
-##########################
-#      PROJECT LIBS      #
-##########################
+# #########################
+# PROJECT LIBS      #
+# #########################
 
 # --- IO ---
 add_subdirectory(lib/io)
@@ -42,17 +43,18 @@ add_subdirectory(lib/gui)
 # --- WINDOW ---
 add_subdirectory(lib/window)
 
-
 # --- GFX ---
 add_subdirectory(lib/gfx)
 
+# --- IMAGE ---
+add_subdirectory(lib/image)
 
-##################################
-#      LINKING ALL THE LIBS      #
-##################################
-
+# #################################
+# LINKING ALL THE LIBS      #
+# #################################
 add_executable(${PROJECT_NAME} src/main.c ${imgui_backends})
 target_link_libraries(${PROJECT_NAME}
+  image
   OpenGL::GL
   glad
   glfw
@@ -61,4 +63,5 @@ target_link_libraries(${PROJECT_NAME}
   gui
   window
   gfx
+  cglm
 )

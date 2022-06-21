@@ -74,7 +74,14 @@ char *read_shader(const char *type, const char *name)
 void setUniform4f(uint32_t shader, const char *name, float v0, float v1,
                   float v2, float v3)
 {
-  int32_t location = glGetUniformLocation(shader, "u_Color");
+  int32_t location = glGetUniformLocation(shader, name);
   assert(location != -1);
   glUniform4f(location, v0, v1, v2, v3);
+}
+
+void setUniform1i(uint32_t shader, const char *name, int32_t value)
+{
+  int32_t location = glGetUniformLocation(shader, name);
+  assert(location != -1);
+  glUniform1i(location, value);
 }
