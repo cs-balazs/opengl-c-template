@@ -6,4 +6,4 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "./*.c")
 add_library(${PROJECT_NAME} STATIC gfx.h ${sources})
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(${PROJECT_NAME} io glad image)
+target_link_libraries(${PROJECT_NAME} io glad image cglm)

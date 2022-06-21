@@ -2,6 +2,7 @@
 #define GFX_HEADER
 
 #include <stdint.h>
+#include <cglm/cglm.h>
 
 // Vertex Buffer
 uint32_t create_vertex_buffer(const void *data, uint32_t size);
@@ -40,6 +41,8 @@ char *read_shader(const char *type, const char *name);
 uint32_t create_shader(const char *name);
 void setUniform4f(uint32_t shader, const char *name, float v0, float v1,
                   float v2, float v3);
+void setUniformMat4f(uint32_t shader, const char *name,
+                     mat4 *projection_matrix);
 void setUniform1i(uint32_t shader, const char *name, int32_t value);
 
 // Textures

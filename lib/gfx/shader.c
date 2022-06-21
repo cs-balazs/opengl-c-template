@@ -85,3 +85,10 @@ void setUniform1i(uint32_t shader, const char *name, int32_t value)
   assert(location != -1);
   glUniform1i(location, value);
 }
+
+void setUniformMat4f(uint32_t shader, const char *name, mat4 *projection_matrix)
+{
+  int32_t location = glGetUniformLocation(shader, name);
+  assert(location != -1);
+  glUniformMatrix4fv(location, 1, GL_FALSE, projection_matrix[0][0]);
+}

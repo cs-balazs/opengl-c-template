@@ -47,6 +47,9 @@ int main(void)
 
   uint32_t index_buffer = create_index_buffer(indicies, 6);
 
+  mat4 proj;
+  glm_ortho(-1.0f, 1.0f, -2.5f, 2.5f, -1.0f, 1.0f, &proj);
+
   uint32_t shader = create_shader("basic");
   glUseProgram(shader);
 
@@ -54,7 +57,8 @@ int main(void)
   int G = 0;
   int B = 0;
 
-  // setUniform4f(shader, "u_Color", 0.0f, 0.0f, 0.0f, 1.0f);
+  setUniform4f(shader, "u_Color", 0.0f, 0.0f, 0.0f, 1.0f);
+  setUniformMat4f(shader, "u_MVP", *proj);
   setUniform1i(shader, "u_Texture", 0);
 
   uint32_t texture = create_texture("assets/opengl.png");
@@ -72,8 +76,8 @@ int main(void)
     gui_update(&R, &G, &B);
 
     glUseProgram(shader);
-    // setUniform4f(shader, "u_Color", (((float)R) / 255.0f),
-    //              (((float)G) / 255.0f), (((float)B) / 255.0f), 1.0f);
+    setUniform4f(shader, "u_Color", (((float)R) / 255.0f),
+                 (((float)G) / 255.0f), (((float)B) / 255.0f), 1.0f);
 
     glBindVertexArray(vertex_array);
 
