@@ -11,6 +11,6 @@ static struct ImGuiIO *io;
 void gui_init(GLFWwindow *win);
 void gui_terminate();
 void gui_render();
-void gui_update(int *R, int *G, int *B);
+void gui_update(float colors[4], float translation[2]);
 
 #endif

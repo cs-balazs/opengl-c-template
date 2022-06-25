@@ -2,15 +2,15 @@
 #include <cimgui.h>
 #include "gui.h"
 
-void gui_update(int *R, int *G, int *B)
+void gui_update(float colors[4], float translation[2])
 {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   igNewFrame();
 
-  igBegin("Color", NULL, ImGuiWindowFlags_None);
-  igSliderInt("R", R, 0, 255, "%d", ImGuiSliderFlags_None);
-  igSliderInt("G", G, 0, 255, "%d", ImGuiSliderFlags_None);
-  igSliderInt("B", B, 0, 255, "%d", ImGuiSliderFlags_None);
+  igBegin("Settings", NULL, ImGuiWindowFlags_None);
+  igColorEdit4("Color", colors, ImGuiSliderFlags_None);
+  igSliderFloat2("Translation", translation, -250, 250, "%.0f",
+                 ImGuiSliderFlags_None);
   igEnd();
 }

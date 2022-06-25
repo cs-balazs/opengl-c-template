@@ -48,17 +48,19 @@ int main(void)
   uint32_t index_buffer = create_index_buffer(indicies, 6);
 
   mat4 proj;
-  glm_ortho(0.0f, 500.0f, 0.0f, 500.0f, -1.0f, 1.0f, &proj);
+  glm_ortho(0.0f, 500.0f, 0.0f, 500.0f, -1.0f, 1.0f, proj);
+  //mat4 view = { {1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 1.0f} };
+  //glm_translate(view, (vec3){ -100, 0, 0 });
 
   uint32_t shader = create_shader("basic");
   glUseProgram(shader);
 
-  int R = 0;
-  int G = 0;
-  int B = 0;
+  mat4 mvp;
+  float translation[2] = { 0 };
+  float colors[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
-  setUniform4f(shader, "u_Color", 0.0f, 0.0f, 0.0f, 1.0f);
-  setUniformMat4f(shader, "u_MVP", *proj);
+  setUniform4f(shader, "u_Color", colors[0], colors[1], colors[2], colors[3]);
+
   setUniform1i(shader, "u_Texture", 0);
 
   uint32_t texture = create_texture("assets/opengl.png");
@@ -73,11 +75,16 @@ int main(void)
   while (!glfwWindowShouldClose(window)) {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    gui_update(&R, &G, &B);
+    gui_update(colors, translation);
+
+    mat4 model = GLM_MAT4_IDENTITY_INIT;
+    glm_translate(model, (vec3){ translation[0], translation[1], 0.0f });
+
+    glm_mat4_mul(proj, model, mvp);
+    setUniformMat4f(shader, "u_MVP", *mvp);
 
     glUseProgram(shader);
-    setUniform4f(shader, "u_Color", (((float)R) / 255.0f),
-                 (((float)G) / 255.0f), (((float)B) / 255.0f), 1.0f);
+    setUniform4f(shader, "u_Color", colors[0], colors[1], colors[2], colors[3]);
 
     glBindVertexArray(vertex_array);
 
