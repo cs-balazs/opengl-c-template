@@ -19,10 +19,10 @@ int main(void)
 
   // clang-format off
   float positions[16] = {
-    -0.5f, -0.5f, 0.0f, 0.0f,
-     0.5f, -0.5f, 1.0f, 0.0f,
-     0.5f,  0.5f, 1.0f, 1.0f,
-    -0.5f,  0.5f, 0.0f, 1.0f,
+     50.0f, 150.0f, 0.0f, 0.0f,
+    450.0f, 150.0f, 1.0f, 0.0f,
+    450.0f, 350.0f, 1.0f, 1.0f,
+     50.0f, 350.0f, 0.0f, 1.0f,
   };
 
   uint32_t indicies[6] = {
@@ -48,7 +48,7 @@ int main(void)
   uint32_t index_buffer = create_index_buffer(indicies, 6);
 
   mat4 proj;
-  glm_ortho(-1.0f, 1.0f, -2.5f, 2.5f, -1.0f, 1.0f, &proj);
+  glm_ortho(0.0f, 500.0f, 0.0f, 500.0f, -1.0f, 1.0f, &proj);
 
   uint32_t shader = create_shader("basic");
   glUseProgram(shader);
