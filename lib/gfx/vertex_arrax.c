@@ -39,7 +39,7 @@ void vertex_array_add_buffer(const uint32_t vertex_array,
   glBindVertexArray(vertex_array);
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 
-  uint32_t offset = 0;
+  uint64_t offset = 0;
   for (uint32_t i = 0; i < layout->length; i++) {
     const BufferLayoutElement element = (layout->elements[i]);
     glEnableVertexAttribArray(i);

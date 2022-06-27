@@ -12,7 +12,7 @@ uint32_t compile_shader(unsigned int type, const char *source)
   glShaderSource(id, 1, &source, NULL);
   glCompileShader(id);
 
-  uint8_t result;
+  int32_t result;
   glGetShaderiv(id, GL_COMPILE_STATUS, &result);
   if (result == GL_FALSE) {
     uint32_t length;
@@ -56,17 +56,25 @@ uint32_t create_shader(const char *name)
 };
 
 /**
- * Parameters type and name can have a maximum summed length of 30 characters.
- * The returned pointer must be freed once the value is not needed. 
+ * Max length of type should be 17 characters.
+ * Max length of name should be 17 characters.
 */
 char *read_shader(const char *type, const char *name)
 {
-  char filename[49] = { 0 };
-  strncat(filename, "shaders/", 15);
-  strncat(filename, type, strlen(type));
-  strncat(filename, "/", 2);
-  strncat(filename, name, strlen(name));
-  strncat(filename, ".glsl", 6);
+  char filename[49] = "shaders/\0";
+
+  uint8_t offset = 8;
+  memcpy(filename + offset, type, 17);
+  offset += strlen(type);
+
+  filename[offset] = '/';
+  offset++;
+
+  memcpy(filename + offset, name, 17);
+  offset += strlen(name);
+
+  char glsl[6] = ".glsl\0";
+  memcpy(filename + offset, glsl, 6);
 
   return read_file((const char *)filename);
 };

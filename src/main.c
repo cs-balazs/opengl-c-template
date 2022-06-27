@@ -81,7 +81,7 @@ int main(void)
     glm_translate(model, (vec3){ translation[0], translation[1], 0.0f });
 
     glm_mat4_mul(proj, model, mvp);
-    setUniformMat4f(shader, "u_MVP", *mvp);
+    setUniformMat4f(shader, "u_MVP", &mvp);
 
     glUseProgram(shader);
     setUniform4f(shader, "u_Color", colors[0], colors[1], colors[2], colors[3]);
